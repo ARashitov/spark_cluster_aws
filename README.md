@@ -1,2 +1,2 @@
-# DEV_TERRAFORM_DASK
+# DEV_terraform_dask
 Project for development infrastructure for distributed DASK
