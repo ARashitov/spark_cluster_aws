@@ -1,8 +1,0 @@
-version: "3.1"
-
-services:
-
-  worker:
-    image: daskdev/dask:2021.9.1-py3.8
-    network_mode: host
-    command: ["dask-worker", "tcp://localhost:8786"]
