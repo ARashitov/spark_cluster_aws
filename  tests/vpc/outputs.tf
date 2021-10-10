@@ -10,13 +10,11 @@ output region {
 
 output allocated_aws_eip_id {
   description = "IP address ID for bastion / master"
-  sensitive = true
   value = aws_eip.master_ip.id
 }
 
 output allocated_public_ip {
   description = "IP address for bastion / master"
-  sensitive = true
   value = aws_eip.master_ip.public_ip
 }
 
