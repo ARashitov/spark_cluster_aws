@@ -41,3 +41,8 @@ variable fpath_user_data_master {
   type        = string
   description = "File path to user data of master node"
 }
+
+variable vpc_cidr {
+  type        = string
+  description = "VPC cidr"
+}

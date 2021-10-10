@@ -20,7 +20,22 @@ module "master_sg" {
       description = "SSH tunnel to database"
       cidr_blocks = "0.0.0.0/0"
     },
+    {
+      from_port   = 8787
+      to_port     = 8787
+      protocol    = "tcp"
+      description = "Dashboard of DASK cluster"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      from_port   = 8786
+      to_port     = 8786
+      protocol    = "tcp"
+      description = "Opening access to worker nodes"
+      cidr_blocks = "${var.vpc_cidr}"
+    },
   ]
+
   egress_with_cidr_blocks = [
     {
       from_port   = 0

@@ -14,6 +14,7 @@ module "dask_cluster" {
   ssh_key = var.ssh_key
 
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+  vpc_cidr = data.terraform_remote_state.vpc.outputs.vpc_cidr
 
   # Master node config
   master_instance_type = var.master_instance_type  

@@ -1,18 +1,24 @@
-variable "region" {
+variable region {
   type = string
 }
 
-variable "name" {
+variable name {
   description = "Name of project"
   type = string
 }
 
-variable "vpc_id" {
+variable vpc_id {
   type = string
+}
+
+variable vpc_cidr {
+  type        = string
+  description = "VPC cidr"
 }
 
 variable ami {
   type        = string
+  description = "AMI id image will be used for master & workers"
 }
 
 variable ssh_key {
