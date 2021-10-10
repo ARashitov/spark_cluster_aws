@@ -1,3 +1,4 @@
+# == COMMON VARIABLES ==
 variable region {
   type = string
 }
@@ -27,11 +28,11 @@ variable ssh_key {
   description = "ssh keys for access to aws"
 }
 
+# == MASTER VARIABLES ==
 variable master_instance_type {
   type        = string
   default     = ""
 }
-
 
 variable "master_subnet" {
   description = "Subnet of bastion instance need to be located"
@@ -49,3 +50,24 @@ variable fpath_user_data_master {
   description = "File path to user data of master node"
 }
 
+# == WORKERS VARIABLES ==
+variable n_workers {
+  type        = number
+  default     = 1
+  description = "DASK workers count"
+}
+
+variable workers_instance_type {
+  type        = string
+  default     = ""
+}
+
+variable "workers_subnet" {
+  description = "Subnet of bastion instance need to be located"
+  type = string
+}
+
+variable fpath_user_data_workers {
+  type        = string
+  description = "File path to user data of master node"
+}

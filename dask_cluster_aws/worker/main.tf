@@ -3,36 +3,29 @@ provider "aws" {
 }
 
 
-module "master_sg" {
+module "workers_sg" {
 
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4"
 
   name        = var.name
-  description = "opening ssh access to ec2 instance"
+  description = "Security group for workers"
   vpc_id      = var.vpc_id
 
   ingress_with_cidr_blocks = [
     {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      description = "Access to whole VPC infrastructure"
+      cidr_blocks = "${var.vpc_cidr}"
+    },
+    {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      description = "SSH tunnel to database"
+      description = "Access over SSH"
       cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 8787
-      to_port     = 8787
-      protocol    = "tcp"
-      description = "Dashboard of DASK cluster"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 8786
-      to_port     = 8786
-      protocol    = "tcp"
-      description = "Opening access to worker nodes"
-      cidr_blocks = "${var.vpc_cidr}"
     },
   ]
 
@@ -49,7 +42,7 @@ module "master_sg" {
 }
 
 
-module "dask_master"{
+module "dask_workers"{
 
 
   source                 = "terraform-aws-modules/ec2-instance/aws"
@@ -57,14 +50,14 @@ module "dask_master"{
 
 
   name                   = var.name
-  instance_count         = 1
+  instance_count         = var.n_workers
 
   ami                    = var.ami
   instance_type          = var.instance_type
   key_name               = var.ssh_key
   monitoring             = true
 
-  vpc_security_group_ids = [module.master_sg.security_group_id]
+  vpc_security_group_ids = [module.workers_sg.security_group_id]
   subnet_id              = var.subnet_id
   associate_public_ip_address = false
 
@@ -78,9 +71,4 @@ module "dask_master"{
     ]
 
   user_data = "${file("${var.fpath_user_data}")}"
-}
-
-resource "aws_eip_association" "dask_master_ip_association" {
-  instance_id   = module.dask_master.id[0]
-  allocation_id = var.master_public_ip
 }

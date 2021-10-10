@@ -1,3 +1,4 @@
+# == COMMON VARIABLES ==
 variable region {
   type = string
 }
@@ -22,19 +23,13 @@ variable instance_type {
 
 variable subnet_id {
   type = string
-  description = "Subnet id where bastion must be deployed"  
+  description = "Subnet id of ec2 instances"  
 }
 
 variable ssh_key {
   type        = string
   default     = ""
   description = "ssh keys for access to aws"
-}
-
-variable master_public_ip {
-  type        = string
-  default     = ""
-  description = "allocated public ip for master node"
 }
 
 variable fpath_user_data {
@@ -45,4 +40,10 @@ variable fpath_user_data {
 variable vpc_cidr {
   type        = string
   description = "VPC cidr"
+}
+
+variable n_workers {
+  type        = number
+  default     = 1
+  description = "DASK workers count"
 }
