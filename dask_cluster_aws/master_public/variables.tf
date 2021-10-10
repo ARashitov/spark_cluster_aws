@@ -36,3 +36,8 @@ variable master_public_ip {
   default     = ""
   description = "allocated public ip for master node"
 }
+
+variable fpath_user_data_master {
+  type        = string
+  description = "File path to user data of master node"
+}

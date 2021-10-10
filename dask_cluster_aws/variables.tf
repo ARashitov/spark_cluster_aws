@@ -38,7 +38,8 @@ variable master_public_ip {
   description = "allocated public ip for master node"
 }
 
-# variable "workers_subnets" {
-#   description = "Private subnet where workers need to be located"
-#   type = list
-# }
+variable fpath_user_data_master {
+  type        = string
+  description = "File path to user data of master node"
+}
+

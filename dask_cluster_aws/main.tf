@@ -15,5 +15,5 @@ module "dask_master" {
   subnet_id = var.master_subnet
   ssh_key = var.ssh_key
   master_public_ip = var.master_public_ip
-
+  fpath_user_data_master = var.fpath_user_data_master 
 }

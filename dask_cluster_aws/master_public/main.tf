@@ -35,8 +35,11 @@ module "master_sg" {
 
 
 module "dask_master"{
+
+
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "~> 2.0"
+
 
   name                   = var.name
   instance_count         = 1
@@ -45,7 +48,6 @@ module "dask_master"{
   instance_type          = var.instance_type
   key_name               = var.ssh_key
   monitoring             = true
-
 
   vpc_security_group_ids = [module.master_sg.security_group_id]
   subnet_id              = var.subnet_id
@@ -59,6 +61,8 @@ module "dask_master"{
             volume_size = 30
         },
     ]
+
+  user_data = "${file("${var.fpath_user_data_master}")}"
 }
 
 resource "aws_eip_association" "dask_master_ip_association" {
