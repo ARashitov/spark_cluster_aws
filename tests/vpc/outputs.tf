@@ -23,10 +23,21 @@ output private_subnets {
   description = "private subnet CIDR-s"
 }
 
+output private_subnets_cidr {
+  value       = module.vpc.private_subnets_cidr_blocks
+  description = "private subnet CIDR-s"
+}
+
 output public_subnets {
   value       = module.vpc.public_subnets
   description = "public subnet CIDR-s"
 }
+
+output public_subnets_cidr {
+  value       = module.vpc.public_subnets_cidr_blocks
+  description = "public subnet CIDR-s"
+}
+
 
 output vpc_cidr {
   value       = module.vpc.vpc_cidr_block

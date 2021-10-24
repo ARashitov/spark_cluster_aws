@@ -70,5 +70,19 @@ module "dask_workers"{
         },
     ]
 
-  user_data = "${file("${var.fpath_user_data}")}"
+  user_data = <<EOF
+#!/bin/bash
+
+echo "version: \"3.1\"
+
+services:
+
+  worker:
+    image: daskdev/dask:2021.9.1-py3.8
+    network_mode: host
+    command: [\"dask-worker\", \"tcp://${join(".", slice(split(".", var.master_subnet_cidr), 0, 3))}.5:8786\"]" > docker-compose.yaml;
+
+sudo docker-compose -f docker-compose.yaml up -d;
+EOF
+
 }

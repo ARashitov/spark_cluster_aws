@@ -21,18 +21,11 @@ module "master_sg" {
       cidr_blocks = "0.0.0.0/0"
     },
     {
-      from_port   = 8787
-      to_port     = 8787
+      from_port   = 0
+      to_port     = 0
       protocol    = "tcp"
-      description = "Dashboard of DASK cluster"
+      description = "Opening access to whole infrastructure"
       cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 8786
-      to_port     = 8786
-      protocol    = "tcp"
-      description = "Opening access to worker nodes"
-      cidr_blocks = "${var.vpc_cidr}"
     },
   ]
 
@@ -47,7 +40,6 @@ module "master_sg" {
   ]
 
 }
-
 
 module "dask_master"{
 
@@ -67,6 +59,7 @@ module "dask_master"{
   vpc_security_group_ids = [module.master_sg.security_group_id]
   subnet_id              = var.subnet_id
   associate_public_ip_address = false
+  private_ip = "${join(".", slice(split(".", var.subnet_cidr), 0, 3))}.5"
 
   root_block_device = [
         {
@@ -77,7 +70,20 @@ module "dask_master"{
         },
     ]
 
-  user_data = "${file("${var.fpath_user_data}")}"
+  user_data = <<EOF
+#!/bin/bash
+
+echo "version: \"3.1\"
+
+services:
+
+  master:
+    image: daskdev/dask:2021.9.1-py3.8
+    network_mode: host
+    command: [\"dask-scheduler\"]" > docker-compose.yaml;
+
+sudo docker-compose -f docker-compose.yaml up -d;
+EOF
 }
 
 resource "aws_eip_association" "dask_master_ip_association" {

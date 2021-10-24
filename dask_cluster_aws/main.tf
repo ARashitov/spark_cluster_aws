@@ -17,6 +17,8 @@ module "dask_master" {
   master_public_ip = var.master_public_ip
   fpath_user_data = var.fpath_user_data_master
   vpc_cidr = var.vpc_cidr
+  subnet_cidr = var.master_subnet_cidr
+
 }
 
 
@@ -31,7 +33,9 @@ module "dask_workers" {
   vpc_cidr = var.vpc_cidr
   ssh_key = var.ssh_key
 
+  master_subnet_cidr = var.master_subnet_cidr
   subnet_id = var.workers_subnet
   instance_type = var.workers_instance_type
   fpath_user_data = var.fpath_user_data_workers
+
 }

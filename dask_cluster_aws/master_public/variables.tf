@@ -25,6 +25,11 @@ variable subnet_id {
   description = "Subnet id where bastion must be deployed"  
 }
 
+variable subnet_cidr {
+  type = string
+  description = "Subnet id where bastion must be deployed"  
+}
+
 variable ssh_key {
   type        = string
   default     = ""

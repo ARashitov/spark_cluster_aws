@@ -39,6 +39,12 @@ variable "master_subnet" {
   type = string
 }
 
+variable master_subnet_cidr {
+  type        = string
+  description = "CIDR of master subnet"
+}
+
+
 variable master_public_ip {
   type        = string
   default     = ""

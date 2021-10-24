@@ -47,3 +47,8 @@ variable n_workers {
   default     = 1
   description = "DASK workers count"
 }
+
+variable master_subnet_cidr {
+  type        = string
+  description = "CIDR of master subnet"
+}

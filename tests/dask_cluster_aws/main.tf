@@ -16,6 +16,8 @@ module "dask_cluster" {
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
   vpc_cidr = data.terraform_remote_state.vpc.outputs.vpc_cidr
 
+  master_subnet_cidr = data.terraform_remote_state.vpc.outputs.public_subnets_cidr[0]
+
   # == MASTER NODE PARAMETERS ==
   master_instance_type = var.master_instance_type  
   master_subnet = data.terraform_remote_state.vpc.outputs.public_subnets[0] 
