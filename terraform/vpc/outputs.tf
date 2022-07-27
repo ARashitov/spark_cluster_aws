@@ -8,7 +8,7 @@ output "environments" {
   description = "Application environments"
 }
 
-output "n_private_subnets_per_environment" {
+output "n_subnets_per_environment" {
   value       = var.n_subnets_per_environment
   description = "Amount of private subnets per environment"
 }
