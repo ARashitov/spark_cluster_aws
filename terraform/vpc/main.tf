@@ -1,25 +1,19 @@
 provider "aws" {
-  region = var.tags.region
-}
-
-locals {
-  n_subnet_per_env = var.n_subnets_per_environment
-  n_envs           = length(var.environments)
-  n_total_subnets  = local.n_envs * local.n_subnet_per_env
+  region = var.region
 }
 
 
 module "vpc" {
 
   source  = "terraform-aws-modules/vpc/aws"
-  version = "= 3.14.0"
+  version = ">= 3.14.0, < 4.0.0"
 
-  name = var.tags.project_name
+  name = var.project_name
   cidr = "10.99.0.0/18"
 
-  azs = ["${var.tags.region}a", "${var.tags.region}b", "${var.tags.region}c"]
+  azs = ["${var.region}a"]
 
-  public_subnets = [for subnet_id in range(0, local.n_total_subnets) : "10.99.${subnet_id}.0/24"]
+  public_subnets = ["10.99.0.0/18"]
 
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -44,9 +38,7 @@ module "vpc" {
     },
   ]
 
-  tags = merge(
-    var.tags,
-    {
-      environment = terraform.workspace,
-  })
+  tags = {
+    environment = terraform.workspace,
+  }
 }
