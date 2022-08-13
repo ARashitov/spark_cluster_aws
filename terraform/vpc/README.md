@@ -34,7 +34,6 @@ No resources.
 | <a name="output_azs"></a> [azs](#output\_azs) | A list of availability zones specified as argument to this module |
 | <a name="output_default_security_group_id"></a> [default\_security\_group\_id](#output\_default\_security\_group\_id) | VPC default security group id |
 | <a name="output_default_vpc_cidr_block"></a> [default\_vpc\_cidr\_block](#output\_default\_vpc\_cidr\_block) | The CIDR block of the Default VPC |
-| <a name="output_default_vpc_default_security_group_id"></a> [default\_vpc\_default\_security\_group\_id](#output\_default\_vpc\_default\_security\_group\_id) | Default security group name |
 | <a name="output_private_subnets"></a> [private\_subnets](#output\_private\_subnets) | EC2 instances private subnet |
 | <a name="output_private_subnets_cidr_blocks"></a> [private\_subnets\_cidr\_blocks](#output\_private\_subnets\_cidr\_blocks) | EC2 instances private CIDR blocks |
 | <a name="output_project_name"></a> [project\_name](#output\_project\_name) | Project name |
