@@ -1,3 +1,3 @@
-# dask cluster on aws
+# Spark on AWS
 
-This is project is aimed to deploy dask cluster on aws ec2 instances
+This project is created for implementation of spark cluster on top of EC2 AWS

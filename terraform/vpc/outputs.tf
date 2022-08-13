@@ -24,16 +24,10 @@ output "default_vpc_cidr_block" {
   description = "The CIDR block of the Default VPC"
 }
 
-output "default_vpc_default_security_group_id" {
-  value       = module.vpc.default_vpc_default_security_group_id
-  description = "Default security group name"
-}
-
 output "azs" {
   value       = module.vpc.azs
   description = "A list of availability zones specified as argument to this module"
 }
-
 
 output "private_subnets" {
   value       = module.vpc.private_subnets
