@@ -1,17 +1,13 @@
-output "tags" {
-  value       = var.tags
-  description = "Tags assigned to project"
+output "project_name" {
+  value       = var.project_name
+  description = "Project name"
 }
 
-output "environments" {
-  value       = var.environments
-  description = "Application environments"
+output "region" {
+  value       = var.region
+  description = "Infrastructure deployment region"
 }
 
-output "n_subnets_per_environment" {
-  value       = var.n_subnets_per_environment
-  description = "Amount of private subnets per environment"
-}
 
 output "vpc_cidr_block" {
   value       = module.vpc.vpc_cidr_block

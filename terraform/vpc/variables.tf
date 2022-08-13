@@ -1,24 +1,11 @@
-variable "tags" {
-  default = {
-    project_name = "dask-cluster"
-    region       = "us-east-2"
-  }
-  description = "Tags set to VPC"
-  type        = map(string)
+variable "project_name" {
+  type        = string
+  default     = "spark-cluster-aws"
+  description = "Project name"
 }
 
-variable "environments" {
-  type = list(string)
-  default = [
-    "dev",
-    "test",
-    "prod",
-  ]
-  description = "Application environments"
-}
-
-variable "n_subnets_per_environment" {
-  type        = number
-  default     = 2
-  description = "Amount of private subnets per environment"
+variable "region" {
+  type        = string
+  default     = "us-east-2"
+  description = "Infrastructure deployment region"
 }

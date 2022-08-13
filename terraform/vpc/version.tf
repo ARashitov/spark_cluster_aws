@@ -4,12 +4,12 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "= 4.9.0"
+      version = ">= 4.26.0, <5.0.0"
     }
   }
   backend "s3" {
     bucket  = "waste-labs-terraform-backends"
-    key     = "dask_cluster_aws/vpc.tfstate"
+    key     = "spark_cluster_aws/vpc.tfstate"
     region  = "us-east-1"
     encrypt = true
   }
