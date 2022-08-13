@@ -18,6 +18,7 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_master_node"></a> [master\_node](#module\_master\_node) | ./master/ | n/a |
+| <a name="module_worker_node"></a> [worker\_node](#module\_worker\_node) | ./worker/ | n/a |
 
 ## Resources
 
@@ -32,18 +33,18 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_key_pair"></a> [key\_pair](#input\_key\_pair) | aws instance key used for ssh | `string` | `"aws-us-east-2"` | no |
 | <a name="input_master_image"></a> [master\_image](#input\_master\_image) | Master node docker image | `string` | `"bde2020/spark-master:3.3.0-hadoop3.3"` | no |
-| <a name="input_master_instance_type"></a> [master\_instance\_type](#input\_master\_instance\_type) | Master node instance type | `string` | `"c5a.large"` | no |
-| <a name="input_master_user_data"></a> [master\_user\_data](#input\_master\_user\_data) | Spark master node user data parameters | `string` | `"#!/bin/bash\necho \"\ndocker run \\\n  -d \\\n  -e INIT_DAEMON_STEP=setup_spark \\\n  -p 8080:8080 -p 7077:7077 \\\n  --name spark-master \\\n  bde2020/spark-master:3.3.0-hadoop3.3\n\" > /home/ubuntu/docker-init.sh;\nsource /home/ubuntu/docker-init.sh;\n"` | no |
+| <a name="input_master_instance_type"></a> [master\_instance\_type](#input\_master\_instance\_type) | Master node instance type | `string` | `"m5a.large"` | no |
 | <a name="input_worker_image"></a> [worker\_image](#input\_worker\_image) | Worker node docker image | `string` | `"bde2020/spark-worker:3.3.0-hadoop3.3"` | no |
-| <a name="input_worker_instance_type"></a> [worker\_instance\_type](#input\_worker\_instance\_type) | Master node instance type | `string` | `"c5a.large"` | no |
-| <a name="input_worker_user_data"></a> [worker\_user\_data](#input\_worker\_user\_data) | Spark worker node user data parameters | `string` | `"#!/bin/bash\necho \"\ndocker run \\\n  -d \\\n  -e INIT_DAEMON_STEP=setup_spark \\\n  -p 8080:8080 -p 7077:7077 \\\n  --name spark-master \\\n  bde2020/spark-master:3.3.0-hadoop3.3\n\" > /home/ubuntu/docker-init.sh;\nsleep 20;\nsource /home/ubuntu/docker-init.sh;\n"` | no |
-| <a name="input_workers_count"></a> [workers\_count](#input\_workers\_count) | Worker instance count | `number` | `3` | no |
+| <a name="input_worker_instance_type"></a> [worker\_instance\_type](#input\_worker\_instance\_type) | Master node instance type | `string` | `"m5a.large"` | no |
+| <a name="input_workers_count"></a> [workers\_count](#input\_workers\_count) | Worker instance count | `number` | `6` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ami_id"></a> [ami\_id](#output\_ami\_id) | AWS ami id |
-| <a name="output_public_cidr"></a> [public\_cidr](#output\_public\_cidr) | Public subnet CIDRs |
-| <a name="output_worker_instance_type"></a> [worker\_instance\_type](#output\_worker\_instance\_type) | worker instance type |
+| <a name="output_master"></a> [master](#output\_master) | Master node spark cluster config |
+| <a name="output_master_connection"></a> [master\_connection](#output\_master\_connection) | Master node private ip |
+| <a name="output_master_private_ip"></a> [master\_private\_ip](#output\_master\_private\_ip) | Private IPv4 of spark master node |
+| <a name="output_workers"></a> [workers](#output\_workers) | Worker nodes spark cluster config |
+| <a name="output_workers_private_ip"></a> [workers\_private\_ip](#output\_workers\_private\_ip) | Private IPv4 of spark worker node |
 <!-- END_TF_DOCS -->

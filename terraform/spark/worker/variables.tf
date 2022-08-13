@@ -44,12 +44,27 @@ variable "subnet_cidr" {
   description = "Master node subnet cidr"
 }
 
-variable "master_image" {
+variable "workers_count" {
+  type        = number
+  description = "Worker instance count"
+}
+
+variable "worker_image" {
   type        = string
   description = "Master node docker image"
 }
 
+variable "security_group_id" {
+  type        = string
+  description = "Security group id for worker instance"
+}
+
 variable "master_private_ip" {
   type        = string
-  description = "Master node private ip"
+  description = "Spark master node private ip"
+}
+
+variable "workers_private_ip" {
+  type        = list(string)
+  description = "Spark workers node private ip"
 }

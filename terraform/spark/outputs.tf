@@ -1,14 +1,24 @@
-output "worker_instance_type" {
-  value       = var.worker_instance_type
-  description = "worker instance type"
+output "master" {
+  value       = "1 * ${var.master_instance_type}"
+  description = "Master node spark cluster config"
 }
 
-output "ami_id" {
-  value       = data.aws_ami.ubuntu.id
-  description = "AWS ami id"
+output "workers" {
+  value       = "${var.workers_count} * ${var.worker_instance_type}"
+  description = "Worker nodes spark cluster config"
 }
 
-output "public_cidr" {
-  value       = data.terraform_remote_state.vpc.outputs.public_subnets_cidr_blocks
-  description = "Public subnet CIDRs"
+output "master_connection" {
+  value       = "spark://${module.master_node.public_ip}:7077"
+  description = "Master node private ip"
+}
+
+output "master_private_ip" {
+  value       = local.master_private_ip
+  description = "Private IPv4 of spark master node"
+}
+
+output "workers_private_ip" {
+  value       = local.workers_private_ip
+  description = "Private IPv4 of spark worker node"
 }

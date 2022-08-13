@@ -1,5 +1,5 @@
 locals {
-  module_name = join("-", [var.project_name, var.env])
+  module_name = join("-", [var.project_name, var.env, "master"])
   user_data   = <<EOF
 #!/bin/bash
 echo "
@@ -67,15 +67,15 @@ module "spark_master" {
 
   name = local.module_name
 
-  create_spot_instance = true
-  ami                  = var.ami
-  instance_type        = var.instance_type
-  key_name             = var.key_name
-  monitoring           = true
+  ami           = var.ami
+  instance_type = var.instance_type
+  key_name      = var.key_name
+  monitoring    = true
 
   vpc_security_group_ids      = [module.security_group_master.security_group_id]
   subnet_id                   = var.subnet_id
   associate_public_ip_address = true
+  private_ip                  = var.master_private_ip
 
   root_block_device = [
     {
@@ -88,5 +88,7 @@ module "spark_master" {
 
   user_data                   = local.user_data
   user_data_replace_on_change = true
-
+  tags = {
+    "spark" : "master"
+  }
 }
