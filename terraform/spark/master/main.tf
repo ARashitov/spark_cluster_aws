@@ -6,7 +6,7 @@ echo "
 docker run \
   -d \
   -e INIT_DAEMON_STEP=setup_spark \
-  -p 8080:8080 -p 7077:7077 \
+  -p 8080:8080 -p 7077:7077 -p 4040:4040 \
   --name spark-master \
   ${var.master_image}
 " > /home/ubuntu/docker-init.sh;
