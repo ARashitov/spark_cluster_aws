@@ -18,7 +18,7 @@ variable "worker_instance_type" {
 
 variable "workers_count" {
   type        = number
-  default     = 6
+  default     = 2
   description = "Worker instance count"
 }
 
